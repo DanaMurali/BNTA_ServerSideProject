@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @SpringBootApplication
-@RestController
 public class NightOwlApplication {
 
 	public static void main(String[] args) {
