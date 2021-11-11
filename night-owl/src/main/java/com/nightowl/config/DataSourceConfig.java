@@ -22,10 +22,11 @@ public class DataSourceConfig {
                 .build();
     }
 
-//    @Bean
-//    public JdbcTemplate jdbcTemplate(HikariDataSource hikariDataSource){
-//        return new JdbcTemplate((Connection) hikariDataSource);
-//    }
+    //passing in our datasource Hikari into our JDBC Template
+    @Bean
+    public JdbcTemplate jdbcTemplate(HikariDataSource hikariDataSource){
+        return new JdbcTemplate((Connection) hikariDataSource);
+    }
 }
 
 
