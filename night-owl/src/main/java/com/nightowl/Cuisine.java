@@ -1,5 +1,6 @@
 package com.nightowl;
 
 public enum Cuisine {
-ITALIAN
+ITALIAN,
+BRITISH
 }
