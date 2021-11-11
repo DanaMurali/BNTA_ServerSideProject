@@ -1,10 +1,11 @@
 package com.nightowl.recipes;
-
+//import javax.persistence.Entity;
 import com.nightowl.Cuisine;
 import com.nightowl.MealType;
 import com.nightowl.SpiceRating;
 
 import java.time.LocalTime;
+
 
 public class Recipe {
     private Integer id;
