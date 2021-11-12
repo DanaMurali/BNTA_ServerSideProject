@@ -41,22 +41,22 @@ public class RecipeDataAccessService implements RecipeDAO {
                 """;
 
         //CAST(? AS animal_type)
-                   //?::animal_type
+        //?::animal_type
 
-       return jdbcTemplate.update(
-               sql,
-               recipes.getName(),
-               recipes.getCuisine().toString(),
-               recipes.isVegetarian(),
-               recipes.isVegan(),
-               recipes.isMeatOnly(),
-               recipes.isPescatarian(),
-               recipes.getMealType().toString(),
-               recipes.getSpiceRating().toString(),
-               recipes.getCookingTime(),
-               recipes.getInstructions()
-       );
-       // return jdbcTemplate.update(sql, dog.name, dog.age, dog.breed, dog.favouriteToy);
+        return jdbcTemplate.update(
+                sql,
+                recipes.getName(),
+                recipes.getCuisine().toString(),
+                recipes.isVegetarian(),
+                recipes.isVegan(),
+                recipes.isMeatOnly(),
+                recipes.isPescatarian(),
+                recipes.getMealType().toString(),
+                recipes.getSpiceRating().toString(),
+                recipes.getCookingTime(),
+                recipes.getInstructions()
+        );
+        // return jdbcTemplate.update(sql, dog.name, dog.age, dog.breed, dog.favouriteToy);
 
 
     }
@@ -96,8 +96,10 @@ public class RecipeDataAccessService implements RecipeDAO {
                 """;
 
 
+
         jdbcTemplate.update(sql, 
                 recipe.getName(),
+
                 recipe.getCuisine().toString(),
                 recipe.isVegetarian(),
                 recipe.isVegan(),

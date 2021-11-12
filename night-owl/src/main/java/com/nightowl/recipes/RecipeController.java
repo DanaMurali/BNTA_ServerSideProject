@@ -37,7 +37,4 @@ public class RecipeController {
     public void updateRecipe( @RequestBody Recipe recipe, @PathVariable("id") Integer id) { recipeService.updateRecipe(recipe,id);}
 }
 
-//  @PutMapping({"id"})
-//    public void updateDog(@PathVariable("id") int id, @RequestBody Dog dog){
-//        dogService.updateDog(id, dog);
-//    }
+
