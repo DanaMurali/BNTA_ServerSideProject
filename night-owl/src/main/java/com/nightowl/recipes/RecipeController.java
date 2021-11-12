@@ -1,9 +1,6 @@
 package com.nightowl.recipes;
-
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "api/v1/recipe")
@@ -13,11 +10,11 @@ public class RecipeController {
 
 
     public RecipeController(RecipeService movieService) {
-        this.recipeService = movieService;
+        this.recipeService = recipeService;
     }
 
     @GetMapping
-    public List<Recipe> listMovies() {
+    public List<Recipe> listRecipe() {
         return recipeService.getRecipe();
     }
 

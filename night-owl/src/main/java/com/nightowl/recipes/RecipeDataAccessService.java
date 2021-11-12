@@ -91,12 +91,22 @@ public class RecipeDataAccessService implements RecipeDAO {
     public void updateRecipe(Recipe recipe, Integer id) {
         String sql = """
                 UPDATE recipes
-                SET name = ?
+                SET name = ?, cuisine = ?::cuisine, vegetarian = ?, vegan = ?, meat_only = ?, pescatarian = ?, meal_type = ?::meal_type, spice_rating = ?::spice_rating, cooking_time = ?, instructions = ?
                 WHERE id = ?
                 """;
 
 
-        jdbcTemplate.update(sql, recipe.getName(), id);
+        jdbcTemplate.update(sql, 
+                recipe.getName(),
+                recipe.getCuisine().toString(),
+                recipe.isVegetarian(),
+                recipe.isVegan(),
+                recipe.isMeatOnly(),
+                recipe.isPescatarian(),
+                recipe.getMealType().toString(),
+                recipe.getSpiceRating().toString(),
+                recipe.getCookingTime(),
+                recipe.getInstructions(), id);
         System.out.println("Updated Record with ID = " + id + "with recipe name: " + recipe);
 
 
