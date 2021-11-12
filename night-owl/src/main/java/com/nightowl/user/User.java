@@ -16,7 +16,6 @@ public record User (List<String> allergies,
                     MealType mealType,
                     SpiceRating spiceRating,
                     Integer cookingTime){
-
 }
 
 

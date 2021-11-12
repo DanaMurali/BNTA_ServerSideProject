@@ -1,6 +1,8 @@
 package com.nightowl;
 
 public enum Cuisine {
+
+
     ITALIAN,
     BRITISH,
     MEXICAN,
@@ -18,3 +20,4 @@ public enum Cuisine {
     THAI,
     VIETNAMESE
 }
+
