@@ -20,8 +20,12 @@ public class RecipeDataAccessService implements RecipeDAO {
     }
 
     @Override
+    //selecting every column we want to the table to return
+    //naming which table from
+    //limiting how many rows we want to see
+    //final line returns the table defined in class RecipeRowMapper
     public List<Recipe> selectRecipes() {
-        String sql = """
+        String sql = """               
                 SELECT id, name, cuisine, vegetarian, vegan, meat_only, pescatarian, meal_type, spice_rating, cooking_time, instructions 
                 FROM recipes
                 LIMIT 100;
@@ -83,21 +87,22 @@ public class RecipeDataAccessService implements RecipeDAO {
 
     }
 
-//    @Override
-//    public int updateRecipeById(int id, String name) {
-//        String sql = """
-//                UPDATE recipes
-//                SET name = ?
-//                WHERE id = ?
-//                """;
-//
-//
-//        return jdbcTemplate.update(sql, new RecipeRowMapper());
-//
-//
-//        /*if (recipe.getName() != null && recipe.getName().length() >0 && !Objects.equals(recipe.getName(), name)){
-//            recipe.setName (name);
-//        }*/
-//    }
+    @Override
+    public void updateRecipe(Recipe recipe, Integer id) {
+        String sql = """
+                UPDATE recipes
+                SET name = ?
+                WHERE id = ?
+                """;
+
+
+        jdbcTemplate.update(sql, recipe.getName(), id);
+        System.out.println("Updated Record with ID = " + id + "with recipe name: " + recipe);
+
+
+        /*if (recipe.getName() != null && recipe.getName().length() >0 && !Objects.equals(recipe.getName(), name)){
+            recipe.setName (name);
+        }*/
+    }
 
 }
