@@ -1,13 +1,9 @@
 package com.nightowl.recipes;
 
-import com.nightowl.Cuisine;
-import com.nightowl.MealType;
-import com.nightowl.SpiceRating;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "api/v1/recipe")
@@ -15,7 +11,7 @@ public class RecipeController {
 
     private RecipeService recipeService;
 
-    @Autowired
+
     public RecipeController(RecipeService movieService) {
         this.recipeService = movieService;
     }
@@ -39,4 +35,7 @@ public class RecipeController {
     public void deleteRecipe(@PathVariable("id") Integer id) {
         recipeService.deleteRecipe(id);
     }
+
+//    @GetMapping("{id}")
+//    public int updateRecipe(@PathVariable("id") Integer id, String name) {return recipeService.updateRecipe(id,name);}
 }
