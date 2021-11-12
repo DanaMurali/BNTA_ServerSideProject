@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+
 @Service
 public class RecipeService {
 
@@ -44,11 +45,11 @@ public class RecipeService {
                 .orElseThrow(() -> new Exceptions(String.format("Recipe with id %s not found", id)));
     }
 
-//    public int updateRecipe(Integer id, String name) {
-//        int result = recipeDAO.deleteRecipe(id);
+    public void updateRecipe( Recipe recipe, Integer id) {
+        recipeDAO.updateRecipe(recipe, id);
 //        if (result != 1) {
 //            throw new IllegalStateException("oops something went wrong");
 //        }
-//        return 1;
-//    }
+
+    }
 }

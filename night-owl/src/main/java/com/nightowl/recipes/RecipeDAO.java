@@ -8,6 +8,6 @@ public interface RecipeDAO {
     int insertRecipe(Recipe movie);
     int deleteRecipe(int id);
     Optional<Recipe> selectRecipeById(int id);
-//    public int updateRecipeById(int id, String name);
+    void updateRecipe( Recipe recipe, Integer id);
 
 }
