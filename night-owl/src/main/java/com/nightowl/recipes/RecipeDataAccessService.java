@@ -22,21 +22,29 @@ public class RecipeDataAccessService implements RecipeDAO {
     }
 
     @Override
-    public int insertRecipe(Recipe recipe) {
+    public int insertRecipe(Recipe recipes) {
         String sql = """
-                INSERT INTO recipe(name, cuisine, vegetarian, vegan, meatOnly, pescatarian, mealType, spiceRating, cookingTime, instructions) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+                INSERT INTO recipes(name, cuisine, vegetarian, vegan, meat_only, pescatarian, meal_type, spice_rating, cooking_time, instructions) 
+                VALUES (?, ?::cuisine, ?, ?, ?, ?, ?::meal_type, ?::spice_rating, ?, ?);
                 """;
-       return jdbcTemplate.update(sql,
-               recipe.name(),
-               recipe.cuisine().toString(),
-               recipe.vegetarian(),
-               recipe.vegan(),
-               recipe.meatOnly(),
-               recipe.pescatarian(),
-               recipe.mealType(),
-               recipe.spiceRating(),
-               recipe.cookingTime(), recipe.instructions() );
+
+        //CAST(? AS animal_type)
+                   //?::animal_type
+
+       return jdbcTemplate.update(
+               sql,
+               recipes.name(),
+               recipes.cuisine(),
+               recipes.vegetarian(),
+               recipes.vegan(),
+               recipes.meatOnly(),
+               recipes.pescatarian(),
+               recipes.mealType(),
+               recipes.spiceRating(),
+               recipes.cookingTime(),
+               recipes.instructions()
+       );
+       // return jdbcTemplate.update(sql, dog.name, dog.age, dog.breed, dog.favouriteToy);
 
 
     }

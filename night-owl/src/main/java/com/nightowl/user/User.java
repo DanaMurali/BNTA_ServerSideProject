@@ -1,6 +1,7 @@
 package com.nightowl.user;
 
 import com.nightowl.Cuisine;
+import com.nightowl.Cuisine;
 import com.nightowl.MealType;
 import com.nightowl.SpiceRating;
 
