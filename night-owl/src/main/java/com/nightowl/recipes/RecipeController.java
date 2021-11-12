@@ -3,6 +3,7 @@ package com.nightowl.recipes;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "api/v1/recipe")
@@ -34,4 +35,7 @@ public class RecipeController {
     public void deleteRecipe(@PathVariable("id") Integer id) {
         recipeService.deleteRecipe(id);
     }
+
+//    @GetMapping("{id}")
+//    public int updateRecipe(@PathVariable("id") Integer id, String name) {return recipeService.updateRecipe(id,name);}
 }

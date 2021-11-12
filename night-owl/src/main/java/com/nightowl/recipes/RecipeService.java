@@ -8,24 +8,6 @@ import java.util.Optional;
 @Service
 public class RecipeService {
 
-//    public List<Recipe> getRecipes(){
-//        return List.of(
-//                new Recipe(
-//                        1,
-//                        "pasta",
-//                        Cuisine.ITALIAN,
-//                        true,
-//                        false,
-//                        false,
-//                        false,
-//                        MealType.DINNER,
-//                        SpiceRating.MILD,
-//                        20,
-//                        "cook food"
-//                )
-//        );
-//    }
-
     private final RecipeDAO recipeDAO;
 
     public RecipeService(RecipeDAO recipeDao) {
@@ -56,17 +38,17 @@ public class RecipeService {
         });
     }
 
-    /*  public void deletePerson(int id) {
-        // business logic
-        Optional<Person> personOptional = personDAO.selectPersonById(id);
-        if (personOptional.isEmpty()) {
-            throw new ResourceNotFound("person with id id: " + id + " not found");
-        }
-        personDAO.deletePerson(id);
-    }*/
 
     public Recipe getRecipe(int id) {
         return recipeDAO.selectRecipeById(id)
                 .orElseThrow(() -> new Exceptions(String.format("Recipe with id %s not found", id)));
     }
+
+//    public int updateRecipe(Integer id, String name) {
+//        int result = recipeDAO.deleteRecipe(id);
+//        if (result != 1) {
+//            throw new IllegalStateException("oops something went wrong");
+//        }
+//        return 1;
+//    }
 }
