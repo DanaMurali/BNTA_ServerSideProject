@@ -9,7 +9,7 @@ public class RecipeController {
     private RecipeService recipeService;
 
 
-    public RecipeController(RecipeService movieService) {
+    public RecipeController(RecipeService recipeService) {
         this.recipeService = recipeService;
     }
 

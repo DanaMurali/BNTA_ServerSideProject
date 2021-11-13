@@ -5,7 +5,7 @@ import com.nightowl.Cuisine;
 import com.nightowl.MealType;
 import com.nightowl.SpiceRating;
 
-
+import java.util.Objects;
 
 
 public class Recipe {
@@ -138,5 +138,18 @@ public class Recipe {
                 ", cookingTime=" + cookingTime +
                 ", instructions='" + instructions + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Recipe recipe = (Recipe) o;
+        return vegetarian == recipe.vegetarian && vegan == recipe.vegan && meatOnly == recipe.meatOnly && pescatarian == recipe.pescatarian && Objects.equals(id, recipe.id) && Objects.equals(name, recipe.name) && cuisine == recipe.cuisine && mealType == recipe.mealType && spiceRating == recipe.spiceRating && Objects.equals(cookingTime, recipe.cookingTime) && Objects.equals(instructions, recipe.instructions);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, cuisine, vegetarian, vegan, meatOnly, pescatarian, mealType, spiceRating, cookingTime, instructions);
     }
 }

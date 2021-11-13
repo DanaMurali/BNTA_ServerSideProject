@@ -20,8 +20,8 @@ CREATE TABLE recipes (
     meal_type meal_type,
     spice_rating spice_rating,
     cooking_time_mins INT NOT NULL,
-    instructions TEXT NOT NULL,
-    ingredient_id INT REFERENCES ingredients(id)
+    instructions TEXT NOT NULL
+
 );
 
 CREATE TABLE recipes_ingredients (
