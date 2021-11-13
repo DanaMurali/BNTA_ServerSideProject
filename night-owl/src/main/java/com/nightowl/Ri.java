@@ -4,15 +4,14 @@ package com.nightowl;
 import java.util.Objects;
 
 public class Ri {
-    
     private Integer id;
     private Integer recipe_id;
-    private Integer ingredients_id;
+    private Integer ingredient_id;
 
-    public Ri(Integer id, Integer recipe_id, Integer ingredients_id) {
+    public Ri(Integer id, Integer recipe_id, Integer ingredient_id) {
         this.id = id;
         this.recipe_id = recipe_id;
-        this.ingredients_id = ingredients_id;
+        this.ingredient_id = ingredient_id;
     }
 
     public Integer getId() {
@@ -31,12 +30,12 @@ public class Ri {
         this.recipe_id = recipe_id;
     }
 
-    public Integer getIngredients_id() {
-        return ingredients_id;
+    public Integer getIngredient_id() {
+        return ingredient_id;
     }
 
-    public void setIngredients_id(Integer ingredients_id) {
-        this.ingredients_id = ingredients_id;
+    public void setIngredient_id(Integer ingredient_id) {
+        this.ingredient_id = ingredient_id;
     }
 
     @Override
@@ -44,7 +43,7 @@ public class Ri {
         return "Ri{" +
                 "id=" + id +
                 ", recipe_id=" + recipe_id +
-                ", ingredients_id=" + ingredients_id +
+                ", ingredient_id=" + ingredient_id +
                 '}';
     }
 
@@ -53,11 +52,13 @@ public class Ri {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ri ri = (Ri) o;
-        return Objects.equals(id, ri.id) && Objects.equals(recipe_id, ri.recipe_id) && Objects.equals(ingredients_id, ri.ingredients_id);
+        return Objects.equals(id, ri.id) && Objects.equals(recipe_id, ri.recipe_id) && Objects.equals(ingredient_id, ri.ingredient_id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, recipe_id, ingredients_id);
+        return Objects.hash(id, recipe_id, ingredient_id);
     }
+
+
 }
