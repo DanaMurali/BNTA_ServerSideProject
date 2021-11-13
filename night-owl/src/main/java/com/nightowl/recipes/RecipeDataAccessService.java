@@ -41,6 +41,7 @@ public class RecipeDataAccessService implements RecipeDAO {
                 """;
 
 
+
        return jdbcTemplate.update(
                sql,
                recipes.getName(),
@@ -55,6 +56,7 @@ public class RecipeDataAccessService implements RecipeDAO {
                recipes.getInstructions()
        );
        // return jdbcTemplate.update(sql, dog.name, dog.age, dog.breed, dog.favouriteToy);
+
 
 
     }
@@ -94,8 +96,12 @@ public class RecipeDataAccessService implements RecipeDAO {
                 """;
 
 
+
         jdbcTemplate.update(sql,
+ 
+
                 recipe.getName(),
+
                 recipe.getCuisine().toString(),
                 recipe.isVegetarian(),
                 recipe.isVegan(),
