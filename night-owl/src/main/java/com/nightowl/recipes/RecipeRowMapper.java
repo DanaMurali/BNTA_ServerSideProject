@@ -13,7 +13,7 @@ public class RecipeRowMapper implements RowMapper<Recipe> {
     public Recipe mapRow(ResultSet resultSet, int rowNum) throws SQLException {
         return new Recipe(
                 resultSet.getInt("id"),
-                resultSet.getString("name"),
+                resultSet.getString("rname"),
                 Cuisine.valueOf(resultSet.getString("cuisine")),
                 Boolean.parseBoolean(resultSet.getString("vegetarian")),
                 Boolean.parseBoolean(resultSet.getString("vegan")),

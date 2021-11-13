@@ -15,7 +15,7 @@ public class IngredientRowMapper implements RowMapper<Ingredient> {
     public Ingredient mapRow(ResultSet resultSet, int rowNum) throws SQLException {
         return new Ingredient(
                 resultSet.getInt("id"),
-                resultSet.getString("name"),
+                resultSet.getString("iname"),
                 resultSet.getString("allergy_category")
 
         );

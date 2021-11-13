@@ -25,7 +25,7 @@ public class IngredientDataAccessService implements IngredientDAO {
     //final line returns the table defined in class RecipeRowMapper
     public List<Ingredient> selectIngredients() {
         String sql = """               
-                SELECT id, name, allergy_category
+                SELECT id, iname, allergy_category
                 FROM ingredients
                 LIMIT 100;
                 """;
@@ -36,8 +36,8 @@ public class IngredientDataAccessService implements IngredientDAO {
     public int insertIngredient(Ingredient ingredient ) {
 
         String sql = """
-                INSERT INTO ingredients (name,allergy_category) 
-                VALUES (?,?) ON CONFLICT ON CONSTRAINT ingredients_name_key DO NOTHING;
+                INSERT INTO ingredients (iname,allergy_category) 
+                VALUES (?,?) ON CONFLICT ON CONSTRAINT ingredients_iname_key DO NOTHING;
                 """;
 
         return jdbcTemplate.update(
@@ -74,7 +74,7 @@ public class IngredientDataAccessService implements IngredientDAO {
     public Optional<Ingredient> selectIngredientById(int id) {
 
         String sql = """
-                SELECT id, name, allergy_category
+                SELECT id, iname, allergy_category
                 FROM ingredients
                 WHERE id = ?
                 """;
@@ -89,7 +89,7 @@ public class IngredientDataAccessService implements IngredientDAO {
     public void updateIngredient(Ingredient ingredient, Integer id) {
         String sql = """
                 UPDATE ingredients
-                SET name = ?, allergy_category = ?
+                SET iname = ?, allergy_category = ?
                 WHERE id = ?
                 """;
 
@@ -98,7 +98,7 @@ public class IngredientDataAccessService implements IngredientDAO {
                 ingredient.getName(),
                 ingredient.getAllergyCategory(),
                 id);
-        System.out.println("Updated Record with ID = " + id + "with ingredient name: " + ingredient);
+        System.out.println("Updated Record with ID = " + id + "with ingredient iname: " + ingredient);
 
 
         /*if (recipe.getName() != null && recipe.getName().length() >0 && !Objects.equals(recipe.getName(), name)){
