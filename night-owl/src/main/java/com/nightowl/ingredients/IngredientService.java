@@ -21,11 +21,11 @@ public class IngredientService {
         return ingredientDAO.selectIngredients();
     }
 
-    public void addNewIngredient(Ingredient ingredient) {
+    public void addNewIngredient(Ingredient ingredient ) {
         //TODO: check if recipe exists
         int result = ingredientDAO.insertIngredient(ingredient);
         if (result != 1) {
-            throw new IllegalStateException("oops something went wrong");
+            throw new IllegalStateException("Ingredient already exists!");
         }
     }
 

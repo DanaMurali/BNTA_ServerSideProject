@@ -37,11 +37,9 @@ public class RecipeDataAccessService implements RecipeDAO {
     public int insertRecipe(Recipe recipes) {
         String sql = """
                 INSERT INTO recipes(name, cuisine, vegetarian, vegan, meat_only, pescatarian, meal_type, spice_rating, cooking_time, instructions) 
-                VALUES (?, ?::cuisine, ?, ?, ?, ?, ?::meal_type, ?::spice_rating, ?, ?);
+                VALUES (?, ?::cuisine, ?, ?, ?, ?, ?::meal_type, ?::spice_rating, ?, ?) ON CONFLICT ON CONSTRAINT recipes_name_key DO NOTHING;
                 """;
 
-        //CAST(? AS animal_type)
-                   //?::animal_type
 
        return jdbcTemplate.update(
                sql,
@@ -96,7 +94,7 @@ public class RecipeDataAccessService implements RecipeDAO {
                 """;
 
 
-        jdbcTemplate.update(sql, 
+        jdbcTemplate.update(sql,
                 recipe.getName(),
                 recipe.getCuisine().toString(),
                 recipe.isVegetarian(),
