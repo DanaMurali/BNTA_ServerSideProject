@@ -10,8 +10,8 @@ import java.util.Optional;
 public interface IngredientDAO {
 
     List<Ingredient> selectIngredients();
-    int insertIngredient(Ingredient movie);
+    int insertIngredient(Ingredient ingredient);
     int deleteIngredient(int id);
     Optional<Ingredient> selectIngredientById(int id);
-    void updateIngredient( Ingredient ingredient, Integer id);
+    void updateIngredient(Ingredient ingredient, Integer id);
 }

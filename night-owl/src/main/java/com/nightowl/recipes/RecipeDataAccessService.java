@@ -26,7 +26,7 @@ public class RecipeDataAccessService implements RecipeDAO {
     //final line returns the table defined in class RecipeRowMapper
     public List<Recipe> selectRecipes() {
         String sql = """               
-                SELECT id, name, cuisine, vegetarian, vegan, meat_only, pescatarian, meal_type, spice_rating, cooking_time, instructions 
+                SELECT id, name, cuisine, vegetarian, vegan, meat_only, pescatarian, meal_type, spice_rating, cooking_time_mins, instructions 
                 FROM recipes
                 LIMIT 100;
                 """;
@@ -36,27 +36,27 @@ public class RecipeDataAccessService implements RecipeDAO {
     @Override
     public int insertRecipe(Recipe recipes) {
         String sql = """
-                INSERT INTO recipes(name, cuisine, vegetarian, vegan, meat_only, pescatarian, meal_type, spice_rating, cooking_time, instructions) 
-                VALUES (?, ?::cuisine, ?, ?, ?, ?, ?::meal_type, ?::spice_rating, ?, ?);
+                INSERT INTO recipes(name, cuisine, vegetarian, vegan, meat_only, pescatarian, meal_type, spice_rating, cooking_time_mins, instructions) 
+                VALUES (?, ?::cuisine, ?, ?, ?, ?, ?::meal_type, ?::spice_rating, ?, ?) ON CONFLICT ON CONSTRAINT recipes_name_key DO NOTHING;
                 """;
 
-        //CAST(? AS animal_type)
-        //?::animal_type
 
-        return jdbcTemplate.update(
-                sql,
-                recipes.getName(),
-                recipes.getCuisine().toString(),
-                recipes.isVegetarian(),
-                recipes.isVegan(),
-                recipes.isMeatOnly(),
-                recipes.isPescatarian(),
-                recipes.getMealType().toString(),
-                recipes.getSpiceRating().toString(),
-                recipes.getCookingTime(),
-                recipes.getInstructions()
-        );
-        // return jdbcTemplate.update(sql, dog.name, dog.age, dog.breed, dog.favouriteToy);
+
+       return jdbcTemplate.update(
+               sql,
+               recipes.getName(),
+               recipes.getCuisine().toString(),
+               recipes.isVegetarian(),
+               recipes.isVegan(),
+               recipes.isMeatOnly(),
+               recipes.isPescatarian(),
+               recipes.getMealType().toString(),
+               recipes.getSpiceRating().toString(),
+               recipes.getCookingTime(),
+               recipes.getInstructions()
+       );
+       // return jdbcTemplate.update(sql, dog.name, dog.age, dog.breed, dog.favouriteToy);
+
 
 
     }
@@ -76,7 +76,7 @@ public class RecipeDataAccessService implements RecipeDAO {
     public Optional<Recipe> selectRecipeById(int id) {
 
         String sql = """
-                SELECT id, name, cuisine, vegetarian, vegan, meat_only, pescatarian, meal_type, spice_rating, cooking_time, instructions 
+                SELECT id, name, cuisine, vegetarian, vegan, meat_only, pescatarian, meal_type, spice_rating, cooking_time_mins, instructions 
                 FROM recipes
                 WHERE id = ?
                 """;
@@ -91,13 +91,15 @@ public class RecipeDataAccessService implements RecipeDAO {
     public void updateRecipe(Recipe recipe, Integer id) {
         String sql = """
                 UPDATE recipes
-                SET name = ?, cuisine = ?::cuisine, vegetarian = ?, vegan = ?, meat_only = ?, pescatarian = ?, meal_type = ?::meal_type, spice_rating = ?::spice_rating, cooking_time = ?, instructions = ?
+                SET name = ?, cuisine = ?::cuisine, vegetarian = ?, vegan = ?, meat_only = ?, pescatarian = ?, meal_type = ?::meal_type, spice_rating = ?::spice_rating, cooking_time_mins = ?, instructions = ?
                 WHERE id = ?
                 """;
 
 
 
-        jdbcTemplate.update(sql, 
+        jdbcTemplate.update(sql,
+ 
+
                 recipe.getName(),
 
                 recipe.getCuisine().toString(),

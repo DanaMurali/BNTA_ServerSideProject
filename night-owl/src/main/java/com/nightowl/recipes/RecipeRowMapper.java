@@ -21,7 +21,7 @@ public class RecipeRowMapper implements RowMapper<Recipe> {
                 Boolean.parseBoolean(resultSet.getString("pescatarian")),
                 MealType.valueOf(resultSet.getString("meal_type")),
                 SpiceRating.valueOf(resultSet.getString("spice_rating")),
-                resultSet.getInt("cooking_time"),
+                resultSet.getInt("cooking_time_mins"),
                 resultSet.getString("instructions")
 
         );

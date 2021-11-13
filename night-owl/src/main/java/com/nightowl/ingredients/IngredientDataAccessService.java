@@ -25,7 +25,7 @@ public class IngredientDataAccessService implements IngredientDAO {
     //final line returns the table defined in class RecipeRowMapper
     public List<Ingredient> selectIngredients() {
         String sql = """               
-                SELECT id, ingredient_name, allergy_category
+                SELECT id, name, allergy_category
                 FROM ingredients
                 LIMIT 100;
                 """;
@@ -33,21 +33,29 @@ public class IngredientDataAccessService implements IngredientDAO {
     }
 
     @Override
-    public int insertIngredient(Ingredient ingredients) {
-        String sql = """
-                INSERT INTO ingredients (ingredient_name,allergy_category) 
-                VALUES (?,?);
-                """;
+    public int insertIngredient(Ingredient ingredient ) {
 
-        //CAST(? AS animal_type)
-        //?::animal_type
+        String sql = """
+                INSERT INTO ingredients (name,allergy_category) 
+                VALUES (?,?) ON CONFLICT ON CONSTRAINT ingredients_name_key DO NOTHING;
+                """;
 
         return jdbcTemplate.update(
                 sql,
-                ingredients.getName(),
-                ingredients.getAllergyCategory()
+                ingredient.getName(),
+                ingredient.getAllergyCategory()
         );
 
+
+        /*
+        private List<Person> db = new ArrayList<>();
+        Optional<Person> person = selectAllPeople()
+                .stream()
+                .filter(p -> p.getId() == id)
+                .findFirst();
+
+        person.ifPresent(p -> db.remove(p));
+        * */
 
     }
 
@@ -66,7 +74,7 @@ public class IngredientDataAccessService implements IngredientDAO {
     public Optional<Ingredient> selectIngredientById(int id) {
 
         String sql = """
-                SELECT id, ingredient_name, allergy_category
+                SELECT id, name, allergy_category
                 FROM ingredients
                 WHERE id = ?
                 """;
@@ -77,11 +85,11 @@ public class IngredientDataAccessService implements IngredientDAO {
 
     }
 
-    @Override
+    {}    @Override
     public void updateIngredient(Ingredient ingredient, Integer id) {
         String sql = """
                 UPDATE ingredients
-                SET ingredient_name = ?, allergy_category = ?
+                SET name = ?, allergy_category = ?
                 WHERE id = ?
                 """;
 

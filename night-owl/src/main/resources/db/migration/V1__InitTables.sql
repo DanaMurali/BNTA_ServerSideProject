@@ -4,14 +4,14 @@ CREATE TYPE spice_rating as ENUM('HOT', 'MEDIUM', 'MILD', 'SWEET');
 
 CREATE TABLE ingredients (
     id BIGSERIAL PRIMARY KEY,
-    ingredient_name TEXT NOT NULL,
+    name TEXT UNIQUE NOT NULL,
     allergy_category TEXT
 
 );
 
 CREATE TABLE recipes (
     id BIGSERIAL PRIMARY KEY,
-    name TEXT NOT NULL,
+    name TEXT UNIQUE NOT NULL,
     cuisine cuisine,
     vegetarian BOOLEAN,
     vegan BOOLEAN,
@@ -21,6 +21,7 @@ CREATE TABLE recipes (
     spice_rating spice_rating,
     cooking_time_mins INT NOT NULL,
     instructions TEXT NOT NULL
+
 );
 
 CREATE TABLE recipes_ingredients (
