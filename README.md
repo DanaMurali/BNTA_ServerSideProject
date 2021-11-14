@@ -7,6 +7,8 @@ Key abbreviations
 
 Purpose of our Recipe API: For the user to be able to filter out recipes within the database according to their allergies.
 
+Method of Coding: Mainly mob coding using IntelliJ's Code with Me feature. Coding alone where absolutely necessary.
+
 Daily Work Record:
 
 Day 1, 10th Nov -> Use miro to create an outline of our project ideas. Planned classes and how everything fits in the whole API.
