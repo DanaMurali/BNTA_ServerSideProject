@@ -14,7 +14,18 @@ public class RiTwoRowMapper implements RowMapper<RiTwo> {
 
 
                 resultSet.getString("rname"),
-                resultSet.getString("array_agg")
+                resultSet.getString("array_agg"),
+                Cuisine.valueOf(resultSet.getString("cuisine")),
+                Boolean.parseBoolean(resultSet.getString("vegetarian")),
+                Boolean.parseBoolean(resultSet.getString("vegan")),
+                Boolean.parseBoolean(resultSet.getString("meat_only")),
+                Boolean.parseBoolean(resultSet.getString("pescatarian")),
+                MealType.valueOf(resultSet.getString("meal_type")),
+                SpiceRating.valueOf(resultSet.getString("spice_rating")),
+                resultSet.getInt("cooking_time_mins"),
+                resultSet.getString("instructions")
         );
     }
 }
+
+

@@ -3,6 +3,7 @@ package com.nightowl;
 import com.nightowl.ingredients.Ingredient;
 import com.nightowl.ingredients.IngredientRowMapper;
 import com.nightowl.recipes.Recipe;
+import com.nightowl.user.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +12,7 @@ import java.util.Optional;
 
 @Repository
 public class RiDataAccessService implements RiDAO {
+
 
     private final JdbcTemplate jdbcTemplate;
 
@@ -25,19 +27,32 @@ public class RiDataAccessService implements RiDAO {
     // ingredients_id from recipes_ingredient to ingredients.id.
     //Once inner join is complete we are selecting the name for recipes rname and ingredients iname from r_i table
     //Using RiTwo Row Mapper because we want to output a combined table showing recipe name and ingredient names.
-    public List<RiTwo> selectRiTwo() {
+    public List<RiTwo> selectRiTwo(User user) {
         String sql = """   
+                 
                   
-                    SELECT id, recipes.rname, array_agg
+                  WITH cte AS (
+                   SELECT id, recipes.rname, array_agg, allergy
                     FROM recipes 
                     LEFT JOIN  ( 
-                       SELECT recipes_ingredients.recipe_id AS id, array_agg(ingredients.iname) 
+                       SELECT recipes_ingredients.recipe_id AS id, array_agg(ingredients.iname), array_agg(ingredients.allergy_category) AS allergy
                        FROM   recipes_ingredients
                        JOIN   ingredients ON recipes_ingredients.ingredient_id = ingredients.id
                        GROUP  BY recipes_ingredients.recipe_id
-                       ) ingredients USING (id);
+                       ) ingredients USING (id)
+                       )
+                    
+                       
+                    SELECT * FROM cte
+                    WHERE NOT (cte.allergy) @> '{lactose}' ; 
+                    
                     
                 """;
+
+
+       // FILTER (WHERE 'lactose' != any (ingredients.allergy_category))
+        //FILTER (WHERE 'lactose' != any (ingredients.allergy_category))
+        //HAVING 'lactose' != ANY(ARRAY_AGG(ingredients.allergy_category))
         return jdbcTemplate.query(sql, new RiTwoRowMapper());
 
         /*public String getFKeyData(String tableName, int i) throws SQLException {

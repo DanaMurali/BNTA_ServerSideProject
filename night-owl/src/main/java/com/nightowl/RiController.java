@@ -3,6 +3,7 @@ package com.nightowl;
 import com.nightowl.ingredients.Ingredient;
 import com.nightowl.ingredients.IngredientService;
 import com.nightowl.recipes.Recipe;
+import com.nightowl.user.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,8 +20,8 @@ public class RiController {
     }
 
     @GetMapping
-    public List<RiTwo> listRi() {
-        return riService.getRiTwo();
+    public List<RiTwo> listRi(User user) {
+        return riService.getRiTwo(user);
     }
 
     @GetMapping("{id}")

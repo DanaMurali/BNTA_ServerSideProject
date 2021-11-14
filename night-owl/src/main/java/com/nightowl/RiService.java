@@ -4,6 +4,7 @@ import com.nightowl.exceptions.Exceptions;
 import com.nightowl.ingredients.Ingredient;
 import com.nightowl.ingredients.IngredientDAO;
 import com.nightowl.recipes.Recipe;
+import com.nightowl.user.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,8 +19,8 @@ public class RiService {
         this.riDAO = riDAO;
     }
 
-    public List<RiTwo> getRiTwo() {
-        return riDAO.selectRiTwo();
+    public List<RiTwo> getRiTwo(User user) {
+        return riDAO.selectRiTwo(user);
     }
 
     public Ri getRi(int id) {
