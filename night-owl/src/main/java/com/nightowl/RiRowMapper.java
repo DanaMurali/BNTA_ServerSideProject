@@ -11,6 +11,7 @@ import java.sql.SQLException;
 
 public class RiRowMapper implements RowMapper<Ri> {
 
+    //purpose - is to allocate specific ingredient to specific recipe by corresponding ids.
     @Override
     public Ri mapRow(ResultSet resultSet, int rowNum) throws SQLException {
         return new Ri(

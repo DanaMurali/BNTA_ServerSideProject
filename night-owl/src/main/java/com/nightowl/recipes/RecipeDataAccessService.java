@@ -13,8 +13,10 @@ import java.util.Optional;
 @Repository
 public class RecipeDataAccessService implements RecipeDAO {
 
+    //instantiating our driver jdbc template
     private final JdbcTemplate jdbcTemplate;
 
+    // constructor for above
     public RecipeDataAccessService(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
@@ -23,7 +25,7 @@ public class RecipeDataAccessService implements RecipeDAO {
     //selecting every column we want to the table to return
     //naming which table from
     //limiting how many rows we want to see
-    //final line returns the table defined in class RecipeRowMapper
+    //final line uses .query method associated with jdbcTemplate to take the sql defined and map to one row of the table using the rowmapper
     public List<Recipe> selectRecipes() {
         String sql = """               
                 SELECT id, rname, cuisine, vegetarian, vegan, meat_only, pescatarian, meal_type, spice_rating, cooking_time_mins, instructions 
@@ -34,12 +36,15 @@ public class RecipeDataAccessService implements RecipeDAO {
     }
 
     @Override
+    //Specifying when column we want to insert our input into.
+    //Had to specify values by leaving a ? as a placeholder for whatever input we'd put in. For enums we have to leave the placeholder ? and cast on it ?::column_name.
+    //using jdbc template's update method - taking in sql and is allocating our input to corresponding property in recipe class. recipes.is for booleans.
+
     public int insertRecipe(Recipe recipes) {
         String sql = """
                 INSERT INTO recipes(rname, cuisine, vegetarian, vegan, meat_only, pescatarian, meal_type, spice_rating, cooking_time_mins, instructions) 
                 VALUES (?, ?::cuisine, ?, ?, ?, ?, ?::meal_type, ?::spice_rating, ?, ?) ON CONFLICT ON CONSTRAINT recipes_name_key DO NOTHING;
                 """;
-
 
        return jdbcTemplate.update(
                sql,
@@ -60,6 +65,8 @@ public class RecipeDataAccessService implements RecipeDAO {
     }
 
     @Override
+    //sql query is saying delete from recipes table where id = ? is a placeholder for our input.
+    //jdbc carrying out sql query and giving back result of that.
     public int deleteRecipe(int id) {
         String sql = """
                 DELETE FROM recipes
@@ -71,6 +78,9 @@ public class RecipeDataAccessService implements RecipeDAO {
     }
 
     @Override
+    //sql query - selecting our column titles from recipe table where id = ? is a placeholder for our input.
+    //jdbc template is our sql query to map everything into one row of our table.
+    //.stream is turns what we put in into a stream of characters and returning the first output.
     public Optional<Recipe> selectRecipeById(int id) {
 
         String sql = """
@@ -86,7 +96,9 @@ public class RecipeDataAccessService implements RecipeDAO {
     }
 
     @Override
-    public void updateRecipe(Recipe recipe, Integer id) {
+    //sql query - updating recipe table and specified column title by SET, where id = ? is a placeholder for our input.
+    //jdbc driver template is just updating it and telling us which row was updated.
+    public int updateRecipe(Recipe recipe, Integer id) {
         String sql = """
                 UPDATE recipes
                 SET rname = ?, cuisine = ?::cuisine, vegetarian = ?, vegan = ?, meat_only = ?, pescatarian = ?, meal_type = ?::meal_type, spice_rating = ?::spice_rating, cooking_time_mins = ?, instructions = ?
@@ -94,7 +106,7 @@ public class RecipeDataAccessService implements RecipeDAO {
                 """;
 
 
-        jdbcTemplate.update(sql,
+         return jdbcTemplate.update(sql,
                 recipe.getName(),
                 recipe.getCuisine().toString(),
                 recipe.isVegetarian(),
@@ -105,7 +117,7 @@ public class RecipeDataAccessService implements RecipeDAO {
                 recipe.getSpiceRating().toString(),
                 recipe.getCookingTime(),
                 recipe.getInstructions(), id);
-        System.out.println("Updated Record with ID = " + id + "with recipe name: " + recipe);
+
 
 
         /*if (recipe.getName() != null && recipe.getName().length() >0 && !Objects.equals(recipe.getName(), name)){
