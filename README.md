@@ -9,7 +9,7 @@ Key abbreviations
 
 Purpose of our Recipe API: For the user to be able to filter out recipes within the database according to their allergies.
 
-Method of Coding: Mainly mob coding using IntelliJ's Code with Me feature. Coding alone where absolutely necessary.
+Method of Coding: Mainly mob coding using IntelliJ's Code with Me feature. Coding alone where absolutely necessary. Percentange of commits is not a realistic record of each individual's work ethic.
 
 Daily Work Record:
 
