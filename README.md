@@ -1,5 +1,7 @@
 # BNTA_ServerSideProject
 
+Night Owls Recipes by Hajera, Darania, Tamara, and Jordan. 
+
 Key abbreviations 
 - ri = recipe ingredient 
 - rname = recipe name
