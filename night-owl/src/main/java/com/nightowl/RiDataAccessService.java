@@ -27,12 +27,16 @@ public class RiDataAccessService implements RiDAO {
     //Using RiTwo Row Mapper because we want to output a combined table showing recipe name and ingredient names.
     public List<RiTwo> selectRiTwo() {
         String sql = """   
-                SELECT recipes.rname, ingredients.iname
-                FROM recipes
-                INNER JOIN recipes_ingredients 
-                	ON recipes_ingredients.recipe_id = recipes.id
-                INNER JOIN ingredients 
-                	ON recipes_ingredients.ingredient_id = ingredients.id;
+                  
+                    SELECT id, recipes.rname, array_agg
+                    FROM recipes 
+                    LEFT JOIN  ( 
+                       SELECT recipes_ingredients.recipe_id AS id, array_agg(ingredients.iname) 
+                       FROM   recipes_ingredients
+                       JOIN   ingredients ON recipes_ingredients.ingredient_id = ingredients.id
+                       GROUP  BY recipes_ingredients.recipe_id
+                       ) ingredients USING (id);
+                    
                 """;
         return jdbcTemplate.query(sql, new RiTwoRowMapper());
 
@@ -44,6 +48,7 @@ public class RiDataAccessService implements RiDAO {
             }
             return fkTableData;
         }*/
+        // adding ingredient foreign keys to array
 
     }
 
