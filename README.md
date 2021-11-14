@@ -5,45 +5,21 @@ Key abbreviations
 - rname = recipe name
 - iname = ingredient name
 
+Purpose of our Recipe API: For the user to be able to filter out recipes within the database according to their allergies.
 
-To-Do List (by day):
+Daily Work Record:
 
-Days POA
+Day 1, 10th Nov -> Use miro to create an outline of our project ideas. Planned classes and how everything fits in the whole API.
 
-Wed, 10th Nov
-Build API - build classes, interfaces✔
-Implement Spring Boot functions✔
-Search recipes: 5 for 14 allergies and spanning different dietary requirements, (start wed evening if possible)
+Day 2, 11th Nov -> Initialized Spring Boot. Created api, service and controller class. Successfully created database via flyway migration and JDBC. Successfully managed to GET Request. Connected localhost to postman and we tried to POST a request to add a new recipe but it is not happy with ENUMs.:(
 
-Thurs, 11th Nov
-Create java packages and classes 
-Set up spring boot 
-Connect to database 
+Day 3, 12th Nov -> Had a syntax error fixed, for enums and have implemented them from java into postgres. Ingredients and Recipes Class successfully created. GET, POST, DELETE & PUT requests successfully working.
 
-Fri, 12th Nov 
-Figure out how to add enums to database.
-Sort out Add, Get by Id, Delete and Update.
-Implement ingredients and foreign key tables into database. 
-Carry on searching recipes and add to cuisine enums.
+Day 4, 13th Nov -> Unique ingredients and recipes on the table. Adding in UNIQUE names for ingrediens and recipes so there is no conflict of interest and so two of the same item for a column for either recipe or ingredient cannot be posted. Got the files to have joined table recipes_ingredients. Got the SQL logic sorted, now working on Java logic.
 
-Sat, 13th Nov 
-Figure out SQL queries and business logic in java.
-Carry on searching recipes and add to cuisine enums.
+Day 5, 14th Nov -> Figured out how to inner join databases to give out exact results necessary. Have successfully associated each ingredient in an array list per recipe rather than returning a messy table which would print out the same thing for each ingredient present in each recipe. Have written complicated sql query involving cte analytic method to filter out recipes according to allergy category. We hav successfully hardcoded it, however now have to implement it into java code to do GET request which it is not happy with for some reason.
 
-Sun, 14th Nov 
-Format recipe_ingredients as a list
-Filter by allergy
-If filter by allergy we have code for every other filter
 
-Mon 15th Nov 
-All business logic should be done and API completed.
 
-Tue, 16th Nov
-Unit Testing & Mocking 
 
-Wed, 18th Nov
-Create a powerpoint for presentation day.		
-
-Thurs, 19th Nov
-Presentation day 
 
