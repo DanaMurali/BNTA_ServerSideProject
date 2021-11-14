@@ -14,7 +14,7 @@ public class RiTwoRowMapper implements RowMapper<RiTwo> {
 
 
                 resultSet.getString("rname"),
-                resultSet.getString("iname")
+                resultSet.getString("array_agg")
         );
     }
 }
