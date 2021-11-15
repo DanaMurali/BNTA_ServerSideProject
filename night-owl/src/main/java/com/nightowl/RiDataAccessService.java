@@ -3,6 +3,7 @@ package com.nightowl;
 import com.nightowl.ingredients.Ingredient;
 import com.nightowl.ingredients.IngredientRowMapper;
 import com.nightowl.recipes.Recipe;
+import com.nightowl.user.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +12,7 @@ import java.util.Optional;
 
 @Repository
 public class RiDataAccessService implements RiDAO {
+
 
     private final JdbcTemplate jdbcTemplate;
 
@@ -25,19 +27,28 @@ public class RiDataAccessService implements RiDAO {
     // ingredients_id from recipes_ingredient to ingredients.id.
     //Once inner join is complete we are selecting the name for recipes rname and ingredients iname from r_i table
     //Using RiTwo Row Mapper because we want to output a combined table showing recipe name and ingredient names.
-    public List<RiTwo> selectRiTwo() {
+    public List<RiTwo> selectRiTwo(User user) {
         String sql = """   
-                  
-                    SELECT id, recipes.rname, array_agg
+                 
+                 WITH cte AS (
+                   SELECT id, recipes.rname, iname, allergy, recipes.cuisine, recipes.vegetarian, recipes.vegan, recipes.meat_only, recipes.pescatarian, recipes.meal_type, recipes.spice_rating, recipes.cooking_time_mins, recipes.instructions
                     FROM recipes 
                     LEFT JOIN  ( 
-                       SELECT recipes_ingredients.recipe_id AS id, array_agg(ingredients.iname) 
+                       SELECT recipes_ingredients.recipe_id AS id, array_agg(ingredients.iname) AS iname, array_agg(ingredients.allergy_category) AS allergy
                        FROM   recipes_ingredients
                        JOIN   ingredients ON recipes_ingredients.ingredient_id = ingredients.id
                        GROUP  BY recipes_ingredients.recipe_id
-                       ) ingredients USING (id);
-                    
+                       ) ingredients USING (id)
+                       )
+                                           
+                    SELECT cte.rname, cte.iname, cte.cuisine, cte.vegetarian, cte.vegan, cte.meat_only, cte.pescatarian, cte.meal_type, cte.spice_rating, cte.cooking_time_mins, cte.instructions 
+                    FROM cte
+                    WHERE ((NOT cte.allergy @> '{?}') AND cte.cuisine = ?::cuisine AND ((cte.vegetarian) = true) AND ((cte.vegan) = true) AND ((cte.meat_only) = false) AND ((cte.pescatarian) = false) AND (cte.meal_type = 'LUNCH') AND ((cte.spice_rating) = 'MILD') AND  ((cte.cooking_time_mins) = 30)); 
+                  
+                                                                 
                 """;
+
+
         return jdbcTemplate.query(sql, new RiTwoRowMapper());
 
         /*public String getFKeyData(String tableName, int i) throws SQLException {
@@ -111,6 +122,11 @@ public class RiDataAccessService implements RiDAO {
         System.out.println("Updated Record with ID = " + id + "with recipe name: " + ri);
 
     }
+
+
+
+
+
 
 
 }
