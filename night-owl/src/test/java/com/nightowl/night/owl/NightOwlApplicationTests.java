@@ -70,5 +70,22 @@ class NightOwlApplicationTests {
 		assertThat(actual).isEqualTo(Optional.of(recipes.get(0)));
 	}
 
+	@Test
+	public void updateTest () {
+
+		//given
+//
+		Recipe recipe = new Recipe(1,"Pasta", Cuisine.ITALIAN,
+				true, true, false, false, MealType.LUNCH, SpiceRating.MILD,
+				20, "Boil in water.");
+
+		assertThat(recipe).isNotNull();
+		//mocking RecipeDAO
+		when(recipeDAO.updateRecipe(recipe, 1)).thenReturn(1);
+
+		assertEquals(1, recipeDAO.updateRecipe(recipe, 1));
+
+	}
+
 
 }
