@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface RiDAO {
 
-    List<RiTwo> selectRiTwo(User user);
+    List<RiTwo> selectRiTwo( User user);
     int insertRi(Ri ri);
     int deleteRi(int id);
     Optional<Ri> selectRiById(int id);

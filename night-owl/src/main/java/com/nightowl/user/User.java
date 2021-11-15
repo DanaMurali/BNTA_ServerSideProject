@@ -33,6 +33,9 @@ public class User {
         this.cookingTime = cookingTime;
     }
 
+    public User() {
+    }
+
     public String getAllergy() {
         return allergy;
     }
