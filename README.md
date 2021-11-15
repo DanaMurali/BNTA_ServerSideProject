@@ -23,6 +23,8 @@ Day 4, 13th Nov -> Unique ingredients and recipes on the table. Adding in UNIQUE
 
 Day 5, 14th Nov -> Figured out how to inner join databases to give out exact results necessary. Have successfully associated each ingredient in an array list per recipe rather than returning a messy table which would print out the same thing for each ingredient present in each recipe. Have written complicated sql query involving cte analytic method to filter out recipes according to allergy category. We have successfully hardcoded it, however now have to implement it into java code to do GET request which it is not happy with for some reason.
 
+Day 6, 15th Nov -> Tried to fix GET request via postman. There are some issues to how we are trying to communicate using RequestParam, path variables, etc...And it still hasn't worked. SQL query itself is working fine. It's linking the request to postman that's a problem. Have run to Colin for help as a last resort. Started to test our application. Having some difficulties trying to test DataAccessService. So we have allocated a method per person to test in our own time.
+
 
 
 
