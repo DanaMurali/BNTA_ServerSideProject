@@ -3,6 +3,7 @@ package com.nightowl.night.owl;
 import com.nightowl.Cuisine;
 import com.nightowl.MealType;
 import com.nightowl.SpiceRating;
+import com.nightowl.ingredients.Ingredient;
 import com.nightowl.recipes.Recipe;
 import com.nightowl.recipes.RecipeDAO;
 import com.nightowl.recipes.RecipeService;
@@ -22,6 +23,8 @@ import static org.mockito.Mockito.when;
 
 @SpringBootTest
 class NightOwlApplicationTests {
+
+	//Recipe Class Tests
 
 	@Autowired
 	//injecting our service class
@@ -50,19 +53,21 @@ class NightOwlApplicationTests {
 	public void getRecipeByIdTest () {
 
 		//given
-		Recipe recipe = new Recipe(1,"Pasta", Cuisine.ITALIAN,
+		List<Recipe> recipes = List.of(new Recipe(1, "Pasta", Cuisine.ITALIAN,
 				true, true, false, false, MealType.LUNCH, SpiceRating.MILD,
-				20, "Boil in water.");
-		List<Recipe> recipes = List.of(recipe);
+				20, "Boil in water."));
 
-		//mocking RecipeDAO
-		when(recipeDAO.selectRecipeById(1)).thenReturn(recipes);
+
+		//mocking RecipeDAO - teaching our mock what to do basically
+		when(recipeDAO.selectRecipeById(1)).thenReturn(Optional.of(new Recipe(1, "Pasta", Cuisine.ITALIAN,
+				true, true, false, false, MealType.LUNCH, SpiceRating.MILD,
+				20, "Boil in water.")));
 
 		//when - because in PersonDAO get person by ID is listed as optional
 		Optional<Recipe> actual = recipeDAO.selectRecipeById(1);
 
 		//then
-		assertThat(actual).isEqualTo(Optional.of(recipes));
+		assertThat(actual).isEqualTo(Optional.of(recipes.get(0)));
 	}
 
 
