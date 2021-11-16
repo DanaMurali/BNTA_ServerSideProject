@@ -86,6 +86,18 @@ class NightOwlApplicationTests {
 		assertEquals(1, recipeDAO.updateRecipe(recipe, 1));
 
 	}
+	@Test
+	public void canInsertRecipe(){
+		//given
+		Recipe Recipe = new Recipe(3,"Plov", Cuisine.UZBEK,
+				false, false, true, true, MealType.DINNER, SpiceRating.MILD,
+				20, "1)Prepare the ingredients by washing and soaking the rice, chopping the lamb into small chunks and dicing the onion and carrots \n 2)Fry the meat, onion and carrots in oil \n 3) Cook until ready.”\n");
+
+		//when
+		when(RecipeDAO)
+
+		//then
+		assertEquals(1, recipeDAO.insertRecipe(recipeDAO, 3));
 
 
-}
+}}
