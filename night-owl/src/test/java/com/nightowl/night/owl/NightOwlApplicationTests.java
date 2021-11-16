@@ -23,6 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -139,12 +140,31 @@ class NightOwlApplicationTests {
 
 	@Test
 	public void deleteRecipeFailsThrowsIllegalStateException() {
+// delete recipe method:
+		// Optional<Recipe> recipes = recipeDAO.selectRecipeById(id);
+		// if recipe exists: int result = recipeDAO.deleteRecipe(id);
+		// if result != 1 (if delete does not work) throw illegal state exception
+		// if recipe does not exist: throw new exception
 
+		List<Recipe> recipes = List.of(new Recipe(1, "Pasta", Cuisine.ITALIAN,
+				true, true, false, false, MealType.LUNCH, SpiceRating.MILD,
+				20, "Boil in water."));
+
+		// when
+		doThrow(IllegalStateException.class).when(recipeDAO.deleteRecipe(1)).equals(0);
+
+		//when(recipeDAO.deleteRecipe(1)).thenReturn(0);
+
+		// then
+		// IllegalStateException("Oi! Why are you trying to delete something that doesn't exist mate?"
+				// use doThrow() for void return type
 
 	}
 
 	@Test
 	public void deleteRecipeFailsIfDoesNotExistThrowsNewException() {
+
+		// Exceptions(String.format("Recipe with id %s not found", id))
 
 	}
 
