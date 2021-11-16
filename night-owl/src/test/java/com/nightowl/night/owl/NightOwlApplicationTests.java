@@ -7,6 +7,7 @@ import com.nightowl.ingredients.Ingredient;
 import com.nightowl.recipes.Recipe;
 import com.nightowl.recipes.RecipeDAO;
 import com.nightowl.recipes.RecipeService;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,7 +19,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -88,4 +91,63 @@ class NightOwlApplicationTests {
 	}
 
 
+
+	@Test
+	public void shouldThrowErrorIfUpdateIsNotSuccessfulTest () {
+
+		//given
+//
+		Recipe recipe = new Recipe(1,"Pasta", Cuisine.ITALIAN,
+				true, true, false, false, MealType.LUNCH, SpiceRating.MILD,
+				20, "Boil in water.");
+
+
+		when(recipeDAO.updateRecipe(recipe, 1)).thenReturn(0);
+
+
+
+		assertThatThrownBy(() -> recipeDAO.updateRecipe(recipe, 1))
+				.hasMessageContaining("Oops! Cannot update your scrumptious recipe!")
+				.isInstanceOf(IllegalStateException.class);
+
+	
+
+	}
+
+//	@Test
+//	public void canInsertRecipe(){
+//		//given
+//		Recipe Recipe = new Recipe(3,"Plov", Cuisine.UZBEK,
+//				false, false, true, true, MealType.DINNER, SpiceRating.MILD,
+//				20, "1)Prepare the ingredients by washing and soaking the rice, chopping the lamb into small chunks and dicing the onion and carrots \n 2)Fry the meat, onion and carrots in oil \n 3) Cook until ready.”\n");
+//
+//		//when
+//		when(RecipeDAO);
+//
+//		//then
+//		assertEquals(1, recipeDAO.insertRecipe(recipeDAO, 3));
+//
+//
+//}
+
+	@Test
+	public void deleteRecipeByIdTest() {
+		// delete recipe method:
+		// Optional<Recipe> recipes = recipeDAO.selectRecipeById(id);
+		// if recipe exists: int result = recipeDAO.deleteRecipe(id);
+		// if result != 1 (if delete does not work) throw illegal state exception
+		// if recipe does not exist: throw new exception
+
+		// given
+		List<Recipe> recipes = List.of(new Recipe(1, "Pasta", Cuisine.ITALIAN,
+				true, true, false, false, MealType.LUNCH, SpiceRating.MILD,
+				20, "Boil in water."));
+
+		// when
+		when(recipeDAO.deleteRecipe(1)).thenReturn(1);
+
+
+		// then
+		assertThat(recipeDAO.deleteRecipe(1)).isEqualTo(1);
+	}
 }
