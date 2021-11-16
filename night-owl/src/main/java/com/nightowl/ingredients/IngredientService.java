@@ -48,10 +48,10 @@ public class IngredientService {
     }
 
     public void updateIngredient( Ingredient ingredient, Integer id) {
-        ingredientDAO.updateIngredient(ingredient, id);
-//        if (result != 1) {
-//            throw new IllegalStateException("oops something went wrong");
-//        }
+       int result =  ingredientDAO.updateIngredient(ingredient, id);
+        if (result != 1) {
+            throw new IllegalStateException("oops something went wrong");
+        }
 
     }
 }
