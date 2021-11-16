@@ -13,5 +13,5 @@ public interface IngredientDAO {
     int insertIngredient(Ingredient ingredient);
     int deleteIngredient(int id);
     Optional<Ingredient> selectIngredientById(int id);
-    void updateIngredient(Ingredient ingredient, Integer id);
+    int updateIngredient(Ingredient ingredient, Integer id);
 }

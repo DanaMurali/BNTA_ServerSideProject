@@ -86,7 +86,7 @@ public class IngredientDataAccessService implements IngredientDAO {
     }
 
     {}    @Override
-    public void updateIngredient(Ingredient ingredient, Integer id) {
+    public int updateIngredient(Ingredient ingredient, Integer id) {
         String sql = """
                 UPDATE ingredients
                 SET iname = ?, allergy_category = ?
@@ -94,11 +94,11 @@ public class IngredientDataAccessService implements IngredientDAO {
                 """;
 
 
-        jdbcTemplate.update(sql,
+        return jdbcTemplate.update(sql,
                 ingredient.getName(),
                 ingredient.getAllergyCategory(),
                 id);
-        System.out.println("Updated Record with ID = " + id + "with ingredient iname: " + ingredient);
+       
 
 
         /*if (recipe.getName() != null && recipe.getName().length() >0 && !Objects.equals(recipe.getName(), name)){

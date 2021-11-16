@@ -4,10 +4,11 @@ import com.nightowl.Cuisine;
 import com.nightowl.MealType;
 import com.nightowl.SpiceRating;
 import com.nightowl.ingredients.Ingredient;
+import com.nightowl.ingredients.IngredientDAO;
+import com.nightowl.ingredients.IngredientService;
 import com.nightowl.recipes.Recipe;
 import com.nightowl.recipes.RecipeDAO;
 import com.nightowl.recipes.RecipeService;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -32,18 +33,25 @@ class NightOwlApplicationTests {
 	@Autowired
 	//injecting our service class
 	private RecipeService recipeService;
+	@Autowired
+	private IngredientService ingredientService;
 
 	@MockBean
 	//injecting our interface/repository which is what we want to mock.
 	private RecipeDAO recipeDAO;
+	@MockBean
+	private IngredientDAO ingredientDAO;
+
+
+	//RECIPE CLASS TESTING
 
 	@Test
 	public void getRecipesTest() {
 
 		//when I call the method then return the data I put in, in a list.
-		when(recipeDAO.selectRecipes()).thenReturn(Stream.of(new Recipe(1,"Pasta", Cuisine.ITALIAN,
+		when(recipeDAO.selectRecipes()).thenReturn(Stream.of(new Recipe(1, "Pasta", Cuisine.ITALIAN,
 				true, true, false, false, MealType.LUNCH, SpiceRating.MILD,
-				20, "Boil in water."), (new Recipe(2,"Fried Egg", Cuisine.ITALIAN,
+				20, "Boil in water."), (new Recipe(2, "Fried Egg", Cuisine.ITALIAN,
 				true, false, false, false, MealType.BREAKFAST, SpiceRating.MILD,
 				5, "Fry in Pan."))).collect(Collectors.toList()));
 
@@ -53,7 +61,7 @@ class NightOwlApplicationTests {
 	}
 
 	@Test
-	public void getRecipeByIdTest () {
+	public void getRecipeByIdTest() {
 
 		//given
 		List<Recipe> recipes = List.of(new Recipe(1, "Pasta", Cuisine.ITALIAN,
@@ -74,11 +82,11 @@ class NightOwlApplicationTests {
 	}
 
 	@Test
-	public void updateTest () {
+	public void updateTest() {
 
 		//given
 //
-		Recipe recipe = new Recipe(1,"Pasta", Cuisine.ITALIAN,
+		Recipe recipe = new Recipe(1, "Pasta", Cuisine.ITALIAN,
 				true, true, false, false, MealType.LUNCH, SpiceRating.MILD,
 				20, "Boil in water.");
 
@@ -91,44 +99,21 @@ class NightOwlApplicationTests {
 	}
 
 
-
 	@Test
-	public void shouldThrowErrorIfUpdateIsNotSuccessfulTest () {
-
+	public void canInsertRecipe() {
 		//given
-//
-		Recipe recipe = new Recipe(1,"Pasta", Cuisine.ITALIAN,
-				true, true, false, false, MealType.LUNCH, SpiceRating.MILD,
-				20, "Boil in water.");
+		Recipe recipe = new Recipe(3, "Plov", Cuisine.UZBEK,
+				false, false, true, true, MealType.DINNER, SpiceRating.MILD,
+				20, "1)Prepare the ingredients by washing and soaking the rice, chopping the lamb into small chunks and dicing the onion and carrots \n 2)Fry the meat, onion and carrots in oil \n 3) Cook until ready.”\n");
 
+		//when
+		when(recipeDAO.insertRecipe(recipe)).thenReturn(1);
 
-		when(recipeDAO.updateRecipe(recipe, 1)).thenReturn(0);
-
-
-
-		assertThatThrownBy(() -> recipeDAO.updateRecipe(recipe, 1))
-				.hasMessageContaining("Oops! Cannot update your scrumptious recipe!")
-				.isInstanceOf(IllegalStateException.class);
-
+		//then
+		assertEquals(1, recipeDAO.insertRecipe(recipe));
 
 
 	}
-
-//	@Test
-//	public void canInsertRecipe(){
-//		//given
-//		Recipe Recipe = new Recipe(3,"Plov", Cuisine.UZBEK,
-//				false, false, true, true, MealType.DINNER, SpiceRating.MILD,
-//				20, "1)Prepare the ingredients by washing and soaking the rice, chopping the lamb into small chunks and dicing the onion and carrots \n 2)Fry the meat, onion and carrots in oil \n 3) Cook until ready.”\n");
-//
-//		//when
-//		when(RecipeDAO);
-//
-//		//then
-//		assertEquals(1, recipeDAO.insertRecipe(recipeDAO, 3));
-//
-//
-//}
 
 	@Test
 	public void deleteRecipeByIdTest() {
@@ -148,6 +133,153 @@ class NightOwlApplicationTests {
 
 
 		// then
+		assertThat(recipes).isNotEmpty();
 		assertThat(recipeDAO.deleteRecipe(1)).isEqualTo(1);
 	}
+
+	@Test
+	public void deleteRecipeFailsThrowsIllegalStateException() {
+
+
+	}
+
+	@Test
+	public void deleteRecipeFailsIfDoesNotExistThrowsNewException() {
+
+	}
+
+	@Test
+	public void shouldThrowErrorIfUpdateIsNotSuccessfulTest() {
+
+		//given
+//
+		Recipe recipe = new Recipe(1, "Pasta", Cuisine.ITALIAN,
+				true, true, false, false, MealType.LUNCH, SpiceRating.MILD,
+				20, "Boil in water.");
+
+
+		when(recipeDAO.updateRecipe(recipe, 1)).thenReturn(0);
+
+		assertThatThrownBy(() -> recipeDAO.updateRecipe(recipe, 1)).hasMessageContaining("Oops! Cannot update your scrumptious recipe!");
+
+
+	}
+
+	//ingredient tests start
+
+	@Test
+	public void getIngredientsTest() {
+
+		//when I call the method then return the data I put in, in a list.
+		when(ingredientDAO.selectIngredients()).thenReturn(Stream.of(new Ingredient(1, "Milk", "Lactose"),
+				(new Ingredient(2, "Bread", "Gluten"))).collect(Collectors.toList()));
+
+		//Comparing the amount of objects in list using method.
+		assertEquals(2, ingredientDAO.selectIngredients().size());
+
+	}
+
+	@Test
+	public void getIngredientByIdTest() {
+
+		//given
+		List<Ingredient> ingredients = List.of(new Ingredient(2, "Bread", "Gluten"));
+
+
+		//mocking RecipeDAO - teaching our mock what to do basically
+		when(ingredientDAO.selectIngredientById(1)).thenReturn(Optional.of(new Ingredient(2, "Bread", "Gluten")));
+
+		//when - because in PersonDAO get person by ID is listed as optional
+		Optional<Ingredient> actual = ingredientDAO.selectIngredientById(1);
+
+		//then
+		assertThat(actual).isEqualTo(Optional.of(ingredients.get(0)));
+	}
+
+	@Test
+	public void updateIngredientTest() {
+
+		//given
+
+		Ingredient ingredient = new Ingredient(1, "bread", "gluten");
+
+		assertThat(ingredient).isNotNull();
+		//mocking RecipeDAO
+		when(ingredientDAO.updateIngredient(ingredient, 1)).thenReturn(1);
+
+		assertEquals(1, ingredientDAO.updateIngredient(ingredient, 1));
+
+	}
+
+
+	@Test
+	public void canInsertIngredient() {
+		//given
+		Ingredient ingredient = new Ingredient(1, "bread", "gluten");
+
+		//when
+		when(ingredientDAO.insertIngredient(ingredient)).thenReturn(1);
+
+		//then
+		assertEquals(1, ingredientDAO.insertIngredient(ingredient));
+
+
+	}
+
+	@Test
+	public void canDeleteIngredientByIdTest() {
+		// delete recipe method:
+		// Optional<Recipe> recipes = recipeDAO.selectRecipeById(id);
+		// if recipe exists: int result = recipeDAO.deleteRecipe(id);
+		// if result != 1 (if delete does not work) throw illegal state exception
+		// if recipe does not exist: throw new exception
+
+		// given
+		List<Ingredient> ingredients = List.of(new Ingredient(1, "bread", "gluten"));
+
+		// when
+		when(ingredientDAO.deleteIngredient(1)).thenReturn(1);
+
+
+		// then
+		assertThat(ingredients).isNotEmpty();
+		assertThat(ingredientDAO.deleteIngredient(1)).isEqualTo(1);
+	}
+
+	@Test
+	public void deleteIngredientFailsThrowsIllegalStateException() {
+
+
+	}
+
+	@Test
+	public void deleteIngredientFailsIfDoesNotExistThrowsNewException() {
+
+	}
+
+	@Test
+	public void shouldThrowErrorIfIngredientUpdateIsNotSuccessfulTest() {
+
+		//given
+//
+		Ingredient ingredient = new Ingredient(1, "bread", "gluten");
+
+		when(ingredientDAO.updateIngredient(ingredient, 1)).thenReturn(0);
+
+		assertThatThrownBy(() -> ingredientDAO.updateIngredient(ingredient, 1)).hasMessageContaining("oops something went wrong");
+
+
+	}
+
 }
+//  @Test
+//    void itThrowsExceptionWhenSavingSomeoneAlreadyInDB(){
+//        when(personDAO.getPeople()).thenReturn(List.of(
+//                new Person(0, "Alan", 20),
+//                new Person(1, "Bob", 25)
+//        ));
+//        Person existingPerson = new Person(0, "Alan", 20);
+//        when(personDAO.savePerson(existingPerson)).thenReturn(existingPerson.getId());
+//
+//        assertThatThrownBy(() -> underTest.savePerson(existingPerson)).hasMessageContaining("person with id " + existingPerson.getId() + " already exists");
+//    }
