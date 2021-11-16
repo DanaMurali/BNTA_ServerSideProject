@@ -24,6 +24,23 @@ public class RiController {
         return riService.getRiTwo(user);
     }
 
+    //    @GetMapping ("{user}")
+//    public List<RiTwo> listRi(@RequestParam(value="allergy") User user) {
+//
+//        return riService.getRiTwo(user);
+//
+//    }
+
+//    @GetMapping ("{allergy}")
+//    public List<RiTwo> listRiTwo(@RequestBody User user, @PathVariable("allergy") String allergy ) {
+//        return riService.getRiTwo(user);
+//    }
+
+//    @GetMapping("/{allergy}")
+//    public List<RiTwo> listRiTwo (@PathVariable String allergy) {
+//        return riService.getRiTwo(allergy);
+//    }
+
     @GetMapping("{id}")
     public Ri getRiId(@PathVariable("id") Integer id) {
         return riService.getRi(id);
