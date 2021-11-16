@@ -33,8 +33,10 @@ public class User {
         this.cookingTime = cookingTime;
     }
 
+
     public User() {
     }
+
 
     public String getAllergy() {
         return allergy;
@@ -44,7 +46,9 @@ public class User {
         this.allergy = allergy;
     }
 
+
     public Cuisine  getCuisine() {
+
         return cuisine;
     }
 
