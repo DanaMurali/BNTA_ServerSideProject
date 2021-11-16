@@ -19,10 +19,41 @@ public class RiController {
         this.riService = riService;
     }
 
+//    @GetMapping ("{user}")
+//    public List<RiTwo> listRi(@RequestParam(value="allergy") User user) {
+//
+//        return riService.getRiTwo(user);
+//
+//    }
+
+
     @GetMapping
-    public List<RiTwo> listRi(User user) {
+
+    public List<RiTwo> listRiTwo(@RequestParam String allergen) {
+        User user = new User();
+        user.setAllergy(allergen);
         return riService.getRiTwo(user);
     }
+
+
+
+    //    @GetMapping ("{user}")
+//    public List<RiTwo> listRi(@RequestParam(value="allergy") User user) {
+//
+//        return riService.getRiTwo(user);
+//
+//    }
+
+//    @GetMapping ("{allergy}")
+//    public List<RiTwo> listRiTwo(@RequestBody User user, @PathVariable("allergy") String allergy ) {
+//        return riService.getRiTwo(user);
+//    }
+
+
+//    @GetMapping("/{allergy}")
+//    public List<RiTwo> listRiTwo (@PathVariable String allergy) {
+//        return riService.getRiTwo(allergy);
+//    }
 
     @GetMapping("{id}")
     public Ri getRiId(@PathVariable("id") Integer id) {

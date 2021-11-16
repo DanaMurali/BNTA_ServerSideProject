@@ -25,6 +25,8 @@ Day 5, 14th Nov -> Figured out how to inner join databases to give out exact res
 
 Day 6, 15th Nov -> Tried to fix GET request via postman. There are some issues to how we are trying to communicate using RequestParam, path variables, etc...And it still hasn't worked. SQL query itself is working fine. It's linking the request to postman that's a problem. Have run to Colin for help as a last resort. Started to test our application. Having some difficulties trying to test DataAccessService. So we have allocated a method per person to test in our own time.
 
+Day 7 16th Nov -> Fixed the GET request via postman. Adding all the recipes and ingredients ids to the database. 
+
 
 
 

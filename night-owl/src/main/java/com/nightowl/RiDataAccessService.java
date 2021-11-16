@@ -30,30 +30,32 @@ public class RiDataAccessService implements RiDAO {
     public List<RiTwo> selectRiTwo(User user) {
         String sql = """   
                  
-                  
-                  WITH cte AS (
-                   SELECT id, recipes.rname, array_agg, allergy
+
+                 WITH cte AS (
+                   SELECT id, recipes.rname, iname, allergy, recipes.cuisine, recipes.vegetarian, recipes.vegan, recipes.meat_only, recipes.pescatarian, recipes.meal_type, recipes.spice_rating, recipes.cooking_time_mins, recipes.instructions
                     FROM recipes 
                     LEFT JOIN  ( 
-                       SELECT recipes_ingredients.recipe_id AS id, array_agg(ingredients.iname), array_agg(ingredients.allergy_category) AS allergy
+                       SELECT recipes_ingredients.recipe_id AS id, array_agg(ingredients.iname) AS iname, array_agg(ingredients.allergy_category) AS allergy
+
                        FROM   recipes_ingredients
                        JOIN   ingredients ON recipes_ingredients.ingredient_id = ingredients.id
                        GROUP  BY recipes_ingredients.recipe_id
                        ) ingredients USING (id)
                        )
-                    
-                       
-                    SELECT * FROM cte
-                    WHERE NOT (cte.allergy) @> '{lactose}' ; 
-                    
-                    
+
+                                           
+                    SELECT cte.rname, cte.iname, cte.cuisine, cte.vegetarian, cte.vegan, cte.meat_only, cte.pescatarian, cte.meal_type, cte.spice_rating, cte.cooking_time_mins, cte.instructions 
+                    FROM cte
+                    WHERE ((NOT cte.allergy @> string_to_array(?, '') )); 
+                  
+                                                                 
                 """;
+        // @> means contains
+//        AND cte.cuisine = 'BRITISH' AND ((cte.vegetarian) = true) AND ((cte.vegan) = true) AND ((cte.meat_only) = false) AND ((cte.pescatarian) = false) AND (cte.meal_type = 'LUNCH') AND ((cte.spice_rating) = 'MILD') AND  ((cte.cooking_time_mins) = 30)
 
 
-       // FILTER (WHERE 'lactose' != any (ingredients.allergy_category))
-        //FILTER (WHERE 'lactose' != any (ingredients.allergy_category))
-        //HAVING 'lactose' != ANY(ARRAY_AGG(ingredients.allergy_category))
-        return jdbcTemplate.query(sql, new RiTwoRowMapper());
+        return jdbcTemplate.query(sql, new RiTwoRowMapper(), user.getAllergy());
+
 
         /*public String getFKeyData(String tableName, int i) throws SQLException {
             DatabaseMetaData dm = connection.getMetaData();
@@ -126,6 +128,11 @@ public class RiDataAccessService implements RiDAO {
         System.out.println("Updated Record with ID = " + id + "with recipe name: " + ri);
 
     }
+
+
+
+
+
 
 
 }

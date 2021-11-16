@@ -43,7 +43,7 @@ public class RecipeDataAccessService implements RecipeDAO {
     public int insertRecipe(Recipe recipes) {
         String sql = """
                 INSERT INTO recipes(rname, cuisine, vegetarian, vegan, meat_only, pescatarian, meal_type, spice_rating, cooking_time_mins, instructions) 
-                VALUES (?, ?::cuisine, ?, ?, ?, ?, ?::meal_type, ?::spice_rating, ?, ?) ON CONFLICT ON CONSTRAINT recipes_name_key DO NOTHING;
+                VALUES (?, ?::cuisine, ?, ?, ?, ?, ?::meal_type, ?::spice_rating, ?, ?) ON CONFLICT ON CONSTRAINT recipes_rname_key DO NOTHING;
                 """;
 
        return jdbcTemplate.update(

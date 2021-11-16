@@ -5,7 +5,7 @@ import java.util.Objects;
 public class RiTwo {
 
     private String rname;
-    private String array_agg;
+    private String iname;
     private Cuisine cuisine;
     private Boolean vegetarian;
     private Boolean vegan;
@@ -16,9 +16,10 @@ public class RiTwo {
     private Integer cooking_time_mins;
     private String instructions;
 
-    public RiTwo(String rname, String array_agg, Cuisine cuisine, Boolean vegetarian, Boolean vegan, Boolean meat_only, Boolean pescatarian, MealType meal_type, SpiceRating spice_rating, Integer cooking_time_mins, String instructions) {
+
+    public RiTwo(String rname, String iname, Cuisine cuisine, Boolean vegetarian, Boolean vegan, Boolean meat_only, Boolean pescatarian, MealType meal_type, SpiceRating spice_rating, Integer cooking_time_mins, String instructions) {
         this.rname = rname;
-        this.array_agg = array_agg;
+        this.iname = iname;
         this.cuisine = cuisine;
         this.vegetarian = vegetarian;
         this.vegan = vegan;
@@ -38,12 +39,12 @@ public class RiTwo {
         this.rname = rname;
     }
 
-    public String getArray_agg() {
-        return array_agg;
+    public String getIname() {
+        return iname;
     }
 
-    public void setArray_agg(String array_agg) {
-        this.array_agg = array_agg;
+    public void setIname(String iname) {
+        this.iname = iname;
     }
 
     public Cuisine getCuisine() {
@@ -122,7 +123,7 @@ public class RiTwo {
     public String toString() {
         return "RiTwo{" +
                 "rname='" + rname + '\'' +
-                ", array_agg='" + array_agg + '\'' +
+                ", iname='" + iname + '\'' +
                 ", cuisine=" + cuisine +
                 ", vegetarian=" + vegetarian +
                 ", vegan=" + vegan +
@@ -140,12 +141,12 @@ public class RiTwo {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RiTwo riTwo = (RiTwo) o;
-        return Objects.equals(rname, riTwo.rname) && Objects.equals(array_agg, riTwo.array_agg) && cuisine == riTwo.cuisine && Objects.equals(vegetarian, riTwo.vegetarian) && Objects.equals(vegan, riTwo.vegan) && Objects.equals(meat_only, riTwo.meat_only) && Objects.equals(pescatarian, riTwo.pescatarian) && meal_type == riTwo.meal_type && spice_rating == riTwo.spice_rating && Objects.equals(cooking_time_mins, riTwo.cooking_time_mins) && Objects.equals(instructions, riTwo.instructions);
+        return Objects.equals(rname, riTwo.rname) && Objects.equals(iname, riTwo.iname) && cuisine == riTwo.cuisine && Objects.equals(vegetarian, riTwo.vegetarian) && Objects.equals(vegan, riTwo.vegan) && Objects.equals(meat_only, riTwo.meat_only) && Objects.equals(pescatarian, riTwo.pescatarian) && meal_type == riTwo.meal_type && spice_rating == riTwo.spice_rating && Objects.equals(cooking_time_mins, riTwo.cooking_time_mins) && Objects.equals(instructions, riTwo.instructions);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(rname, array_agg, cuisine, vegetarian, vegan, meat_only, pescatarian, meal_type, spice_rating, cooking_time_mins, instructions);
+        return Objects.hash(rname, iname, cuisine, vegetarian, vegan, meat_only, pescatarian, meal_type, spice_rating, cooking_time_mins, instructions);
     }
 }
 

@@ -14,7 +14,7 @@ public class RiTwoRowMapper implements RowMapper<RiTwo> {
 
 
                 resultSet.getString("rname"),
-                resultSet.getString("array_agg"),
+                resultSet.getString("iname"),
                 Cuisine.valueOf(resultSet.getString("cuisine")),
                 Boolean.parseBoolean(resultSet.getString("vegetarian")),
                 Boolean.parseBoolean(resultSet.getString("vegan")),
