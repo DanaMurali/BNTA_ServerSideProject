@@ -29,9 +29,13 @@ public class RiController {
 
     @GetMapping
 
-    public List<RiTwo> listRiTwo(@RequestParam String allergen) {
+    public List<RiTwo> listRiTwo(@RequestParam (required = false) String allergen) {
         User user = new User();
-        user.setAllergy(allergen);
+        if (allergen != null) {
+            user.setAllergy(allergen);
+        } else {
+            user.setAllergy("null");
+        }
         return riService.getRiTwo(user);
     }
 

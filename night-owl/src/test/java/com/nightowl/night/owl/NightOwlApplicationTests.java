@@ -11,6 +11,7 @@ import com.nightowl.user.User;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
@@ -28,6 +29,7 @@ import static org.mockito.Mockito.doThrow;
 
 import static org.mockito.Mockito.when;
 
+
 @SpringBootTest
 class NightOwlApplicationTests {
 
@@ -38,18 +40,14 @@ class NightOwlApplicationTests {
 	private RecipeService recipeService;
 	@Autowired
 	private IngredientService ingredientService;
-	@Autowired
-	private RiService riService;
-	@Autowired
-	private User user;
+
 
 	@MockBean
 	//injecting our interface/repository which is what we want to mock.
 	private RecipeDAO recipeDAO;
 	@MockBean
 	private IngredientDAO ingredientDAO;
-	@MockBean
-	private RiDAO riDAO;
+
 
 
 	//RECIPE CLASS TESTING
@@ -207,7 +205,7 @@ class NightOwlApplicationTests {
 	//DATABASE TEST
 
 	@Test
-	public void riFilterTest() {
+	public void shouldFilterByAllergyTest() {
 		//TODO: mock database and test filter in ri dataccesservice
 
 //		User user = new User();
