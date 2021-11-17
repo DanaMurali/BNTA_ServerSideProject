@@ -11,14 +11,17 @@ import java.sql.SQLException;
 public class RecipeRowMapper implements RowMapper<Recipe> {
     @Override
     public Recipe mapRow(ResultSet resultSet, int rowNum) throws SQLException {
+
+        //if (resultSet.g)
+
         return new Recipe(
                 resultSet.getInt("id"),
                 resultSet.getString("rname"),
                 Cuisine.valueOf(resultSet.getString("cuisine")),
-                Boolean.parseBoolean(resultSet.getString("vegetarian")),
-                Boolean.parseBoolean(resultSet.getString("vegan")),
-                Boolean.parseBoolean(resultSet.getString("meat_only")),
-                Boolean.parseBoolean(resultSet.getString("pescatarian")),
+                resultSet.getBoolean("vegetarian"),
+                resultSet.getBoolean("vegan"),
+                resultSet.getBoolean("meat_only"),
+                resultSet.getBoolean("pescatarian"),
                 MealType.valueOf(resultSet.getString("meal_type")),
                 SpiceRating.valueOf(resultSet.getString("spice_rating")),
                 resultSet.getInt("cooking_time_mins"),

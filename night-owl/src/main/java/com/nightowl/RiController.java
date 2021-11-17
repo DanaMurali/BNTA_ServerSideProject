@@ -36,8 +36,12 @@ public class RiController {
         } else {
             user.setAllergy("null");
         }
+//
+
+
         return riService.getRiTwo(user);
     }
+
 
 
 
