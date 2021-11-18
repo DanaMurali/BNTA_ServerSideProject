@@ -19,49 +19,26 @@ public class RiController {
         this.riService = riService;
     }
 
-//    @GetMapping ("{user}")
-//    public List<RiTwo> listRi(@RequestParam(value="allergy") User user) {
-//
-//        return riService.getRiTwo(user);
-//
-//    }
-
 
     @GetMapping
-
-    public List<RiTwo> listRiTwo(@RequestParam (required = false) String allergen) {
+    public List<RiTwo> listRiTwo(@RequestParam (required = false) String allergen, @RequestParam (required = false) Integer cookingTime) {
         User user = new User();
         if (allergen != null) {
             user.setAllergy(allergen);
         } else {
             user.setAllergy("null");
         }
-//
 
+        if (cookingTime != null) {
+            user.setCookingTime(cookingTime);
+        } else {
+            user.setCookingTime(300);
+        }
 
         return riService.getRiTwo(user);
     }
 
 
-
-
-    //    @GetMapping ("{user}")
-//    public List<RiTwo> listRi(@RequestParam(value="allergy") User user) {
-//
-//        return riService.getRiTwo(user);
-//
-//    }
-
-//    @GetMapping ("{allergy}")
-//    public List<RiTwo> listRiTwo(@RequestBody User user, @PathVariable("allergy") String allergy ) {
-//        return riService.getRiTwo(user);
-//    }
-
-
-//    @GetMapping("/{allergy}")
-//    public List<RiTwo> listRiTwo (@PathVariable String allergy) {
-//        return riService.getRiTwo(allergy);
-//    }
 
     @GetMapping("{id}")
     public Ri getRiId(@PathVariable("id") Integer id) {

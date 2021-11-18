@@ -47,15 +47,7 @@ public class IngredientDataAccessService implements IngredientDAO {
         );
 
 
-        /*
-        private List<Person> db = new ArrayList<>();
-        Optional<Person> person = selectAllPeople()
-                .stream()
-                .filter(p -> p.getId() == id)
-                .findFirst();
 
-        person.ifPresent(p -> db.remove(p));
-        * */
 
     }
 
@@ -101,8 +93,6 @@ public class IngredientDataAccessService implements IngredientDAO {
        
 
 
-        /*if (recipe.getName() != null && recipe.getName().length() >0 && !Objects.equals(recipe.getName(), name)){
-            recipe.setName (name);
-        }*/
+
     }
 }

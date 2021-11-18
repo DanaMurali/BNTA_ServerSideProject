@@ -29,8 +29,6 @@ public class RiDataAccessService implements RiDAO {
     //Using RiTwo Row Mapper because we want to output a combined table showing recipe name and ingredient names.
     public List<RiTwo> selectRiTwo(User user) {
         String sql = """   
-                 
-
                  WITH cte AS (
                    SELECT id, recipes.rname, iname, allergy, recipes.cuisine, recipes.vegetarian, recipes.vegan, recipes.meat_only, recipes.pescatarian, recipes.meal_type, recipes.spice_rating, recipes.cooking_time_mins, recipes.instructions
                     FROM recipes 
@@ -41,33 +39,15 @@ public class RiDataAccessService implements RiDAO {
                        JOIN   ingredients ON recipes_ingredients.ingredient_id = ingredients.id
                        GROUP  BY recipes_ingredients.recipe_id
                        ) ingredients USING (id)
-                       )
-
-                                           
+                       )                                  
                     SELECT cte.rname, cte.iname, cte.cuisine, cte.vegetarian, cte.vegan, cte.meat_only, cte.pescatarian, cte.meal_type, cte.spice_rating, cte.cooking_time_mins, cte.instructions 
                     FROM cte
-                    WHERE NOT cte.allergy @> string_to_array(?, ''); 
-                  
-                                                                 
+                    WHERE NOT cte.allergy @> string_to_array(?, '') AND (cte.cooking_time_mins < ?);                                                        
                 """;
 
-        // AND ((cte.vegetarian) = ?) AND ((cte.vegan) = ?) AND ((cte.meat_only) = ?) AND ((cte.pescatarian) = ?)
-        // @> means contains
-//        AND cte.cuisine = 'BRITISH' AND ((cte.vegetarian) = true) AND ((cte.vegan) = true) AND ((cte.meat_only) = false) AND ((cte.pescatarian) = false) AND (cte.meal_type = 'LUNCH') AND ((cte.spice_rating) = 'MILD') AND  ((cte.cooking_time_mins) = 30)
+        return jdbcTemplate.query(sql, new RiTwoRowMapper(), user.getAllergy(), user.getCookingTime());
 
 
-        return jdbcTemplate.query(sql, new RiTwoRowMapper(), user.getAllergy());
-
-//, user.isVegetarian(), user.isVegan(), user.isMeatOnly(), user.isPescatarian()
-        /*public String getFKeyData(String tableName, int i) throws SQLException {
-            DatabaseMetaData dm = connection.getMetaData();
-            ResultSet rs = dm.getImportedKeys(null, null, tableName);
-            while (rs.next()) {
-                fkTableData = rs.getString(i);
-            }
-            return fkTableData;
-        }*/
-        // adding ingredient foreign keys to array
 
     }
 
@@ -84,7 +64,7 @@ public class RiDataAccessService implements RiDAO {
                 ri.getRecipe_id(),
                 ri.getIngredient_id()
         );
-        // return jdbcTemplate.update(sql, dog.name, dog.age, dog.breed, dog.favouriteToy);
+
 
 
     }

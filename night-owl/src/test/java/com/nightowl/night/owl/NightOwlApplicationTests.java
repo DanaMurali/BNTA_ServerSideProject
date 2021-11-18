@@ -202,31 +202,6 @@ class NightOwlApplicationTests {
 	}
 
 
-	//DATABASE TEST
-
-	@Test
-	public void shouldFilterByAllergyTest() {
-		//TODO: mock database and test filter in ri dataccesservice
-
-//		User user = new User();
-////		String allergen = "lactose";
-////		user.setAllergy(allergen);
-//
-//		List<RiTwo> recipes = List.of(new RiTwo("pasta", "flour", Cuisine.AMERICAN,
-//				true, true, false, false, MealType.LUNCH, SpiceRating.MILD,
-//				30, "Cook"));
-//
-//		//when I call the method then return the data I put in, in a list.
-//		when(riDAO.selectRiTwo(user)).thenReturn((List<RiTwo>) new RiTwo("pasta", "flour", Cuisine.AMERICAN,
-//				true, true, false, false, MealType.LUNCH, SpiceRating.MILD,
-//				30, "Cook"));
-//
-//		//Comparing the amount of objects in list using method.
-//		assertEquals(recipes, riDAO.selectRiTwo(user));
-
-	}
-
-
 
 	//ingredient testing
 
@@ -304,6 +279,8 @@ class NightOwlApplicationTests {
 				true, true, false, false, MealType.LUNCH, SpiceRating.MILD,
 				20, "Boil in water."));
 
+		assertThat(recipes.get(0)).isNotNull();
+
 		// when
 		when(recipeDAO.deleteRecipe(1)).thenReturn(1);
 
@@ -312,15 +289,7 @@ class NightOwlApplicationTests {
 		assertThat(recipeDAO.deleteRecipe(1)).isEqualTo(1);
 
 
-		//List<Ingredient> ingredients = List.of(new Ingredient(1, "bread", "gluten"));
 
-		// when
-		//when(ingredientDAO.deleteIngredient(1)).thenReturn(1);
-
-
-		// then
-		//	assertThat(ingredients).isNotEmpty();
-		//assertThat(ingredientDAO.deleteIngredient(1)).isEqualTo(1);
 	}
 
 

@@ -12,7 +12,7 @@ public class RecipeRowMapper implements RowMapper<Recipe> {
     @Override
     public Recipe mapRow(ResultSet resultSet, int rowNum) throws SQLException {
 
-        //if (resultSet.g)
+
 
         return new Recipe(
                 resultSet.getInt("id"),

@@ -47,6 +47,7 @@ public class RecipeService {
     }
 
     //calling select recipe by id from interface and will work if id exists, if not will throw recipe with id not found.
+
     public Recipe getRecipe(int id) {
         return recipeDAO.selectRecipeById(id)
                 .orElseThrow(() -> new Exceptions(String.format("Recipe with id %s not found", id)));

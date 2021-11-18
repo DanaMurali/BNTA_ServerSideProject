@@ -61,6 +61,9 @@ public class RecipeDataAccessService implements RecipeDAO {
        );
        // return jdbcTemplate.update(sql, dog.name, dog.age, dog.breed, dog.favouriteToy);
 
+        //inputing a string to postman line 52
+        //converting to enum line 46
+        //now postgres recieves enum so jdbc updates table with the enum
 
     }
 
@@ -120,9 +123,7 @@ public class RecipeDataAccessService implements RecipeDAO {
 
 
 
-        /*if (recipe.getName() != null && recipe.getName().length() >0 && !Objects.equals(recipe.getName(), name)){
-            recipe.setName (name);
-        }*/
+
     }
 
 }
