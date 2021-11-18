@@ -34,7 +34,7 @@ Instructions For Set Up:
 
 1) CREATE DATABASE nightowl;
 2) Run Spring Boot Night Owl Application.
-3) Choice of entering in recipes through postman(contact us for json file) or database(copy and paste code from our db resources onto terminal: BNTA_ServerSideProject/night-owl/src/main/java/com/nightowl/databaseResources/).
+3) Choice of entering in recipes through postman - recipes can be found here in json format (BNTA_ServerSideProject/Back-End Project MegaDoc.pdf) or via the database (copy and paste code from our db resources onto terminal: BNTA_ServerSideProject/night-owl/src/main/java/com/nightowl/databaseResources/) - recommend doing this one code block at a time. psql can't take all 250 lines of code in one go.
 4) From user's point of view, we're currently at a point where user can only input allergy or cooking time not both at once
 
 
