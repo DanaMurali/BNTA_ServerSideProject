@@ -29,13 +29,51 @@ Day 7, 16th Nov -> Fixed GET request via postman. Adding all the recipes and ing
 
 Day 8, 17th Nov -> Finished up testing all service classes. Ran out of time to test the data access service class. Making presentation and preparing for the 18th.
 
+Day 9, 18th Nov -> Day of Judgement aka Presentation Day
 
 Instructions For Set Up:
 
 1) CREATE DATABASE nightowl;
+
 2) Run Spring Boot Night Owl Application.
+
 3) Choice of entering in recipes through postman - recipes can be found here in json format (BNTA_ServerSideProject/Back-End Project MegaDoc.pdf) or via the database (copy and paste code from our db resources onto terminal: BNTA_ServerSideProject/night-owl/src/main/java/com/nightowl/databaseResources/) - recommend doing this one code block at a time. psql can't take all 250 lines of code in one go.
-4) From user's point of view, we're currently at a point where user can only input allergy or cooking time not both at once
+
+4) From user's point of view, we're currently at a point where user can only input allergy or cooking time not both at once.
+
+
+Path Variables - for Recipe Database 
+
+List all Recipes:
+
+List Recipe By Id:
+
+Add Recipe to Database:
+
+To Update Recipe in Database:
+
+Delete Recipe in Database:
+
+
+Path Variables - for Ingredient Database 
+
+List all Ingredients:
+
+List Ingredient By Id:
+
+Add Ingredient to Database:
+
+Update Ingredient in Database:
+
+Delete Ingredient in Database:
+
+
+Path Variables - for Recipes_Ingredients Database to filter by allergy or cooking time
+
+List Recipes According to Allergy:
+
+List Recipes According to Cooking Time:
+
 
 
 
