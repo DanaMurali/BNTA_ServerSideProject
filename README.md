@@ -44,35 +44,37 @@ Instructions For Set Up:
 
 Path Variables - for Recipe Database 
 
-List all Recipes:
+List all Recipes: GET localhost:8080/api/v1/recipe
 
-List Recipe By Id:
+List Recipe By Id: e.g. GET localhost:8080/api/v1/recipe/1
 
-Add Recipe to Database:
+Add Recipe to Database: POST localhost:8080/api/v1/recipe
 
-To Update Recipe in Database:
+To Update Recipe in Database: e.g. PUT localhost:8080/api/v1/recipe/1  [enter change in body]
 
-Delete Recipe in Database:
+Delete Recipe in Database: e.g DELETE localhost:8080/api/v1/recipe/1
 
 
 Path Variables - for Ingredient Database 
 
-List all Ingredients:
+List all Ingredients: GET localhost:8080/api/v1/ingredient
 
-List Ingredient By Id:
+List Ingredient By Id: e.g. GET localhost:8080/api/v1/ingredient/1
 
-Add Ingredient to Database:
+Add Ingredient to Database: POST localhost:8080/api/v1/ingredient
 
-Update Ingredient in Database:
+Update Ingredient in Database: e.g. PUT localhost:8080/api/v1/ingredient/1  [enter change in body]
 
-Delete Ingredient in Database:
+Delete Ingredient in Database: e.g DELETE localhost:8080/api/v1/ingredient/1
 
 
 Path Variables - for Recipes_Ingredients Database to filter by allergy or cooking time
 
-List Recipes According to Allergy:
+List all recipes with ingredients: GET localhost:8080/api/v1/ri
 
-List Recipes According to Cooking Time:
+List Recipes According to Allergy: e.g GET localhost:8080/api/v1/ri?allergen=lactose
+
+List Recipes According to Cooking Time: e.g GET localhost:8080/api/v1/ri?cookingTime=30
 
 
 
