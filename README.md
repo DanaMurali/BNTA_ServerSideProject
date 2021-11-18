@@ -27,6 +27,12 @@ Day 6, 15th Nov -> Tried to fix GET request via postman. There are some issues t
 
 Day 7 16th Nov -> Fixed the GET request via postman. Adding all the recipes and ingredients ids to the database. 
 
+Instructions For Set Up:
+
+1) CREATE DATABASE nightowl;
+2) Run Spring Boot Night Owl Application.
+3) Choice of entering in recipes through postman(contact us for json file) or database(copy and paste code from our db resources onto terminal).
+
 
 
 
