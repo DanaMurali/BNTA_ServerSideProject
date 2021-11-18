@@ -32,6 +32,7 @@ Instructions For Set Up:
 1) CREATE DATABASE nightowl;
 2) Run Spring Boot Night Owl Application.
 3) Choice of entering in recipes through postman(contact us for json file) or database(copy and paste code from our db resources onto terminal).
+4) From user's point of view, we're currently at a point where user can only input allergy or cooking time not both at once
 
 
 
