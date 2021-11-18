@@ -1,6 +1,6 @@
 use below for example
 {
-"name": "food",
+"name": "pasta",
 "cuisine": "THAI",
 "vegetarian": false,
 "vegan": false,
@@ -9,6 +9,6 @@ use below for example
 "mealType": "DINNER",
 "spiceRating": "HOT",
 "cookingTime": 50,
-"instructions": "cook"
+"instructions": "boil in water"
 }
 

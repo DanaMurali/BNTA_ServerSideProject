@@ -30,22 +30,4 @@ public class DataSourceConfig {
 }
 
 
-/*
-@Bean
-    @Primary // need primary here because you can have multiple data sources - denoting this one as the main
-    @ConfigurationProperties("app.datasource.main")
-    public HikariDataSource hikariDataSource(){
-        return DataSourceBuilder
-                .create()
-                .type(HikariDataSource.class)
-                .build();
-    } // this above code expects configuration - we're taking our configuration from application.properties
-
-    @Bean
-    public JdbcTemplate jdbcTemplate(HikariDataSource hikariDataSource){
-        return new JdbcTemplate(hikariDataSource);
-    } // within jdbc template we can pass a data source
-
-*
-*/
 
